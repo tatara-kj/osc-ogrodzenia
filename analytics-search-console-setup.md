@@ -14,13 +14,13 @@
 
 1. Klient loguje się na swoje konto Google.
 2. W Search Console dodaje usługę typu `URL prefix` dla:
-   `https://tatara-kj.github.io/osc-ogrodzenia/`
+   `https://oscogrodzenia.pl/`
 3. Najprostsza weryfikacja: meta tag HTML lub plik HTML.
 4. Jeśli klient wybierze meta tag, należy dodać go w sekcji `<head>` każdej podstrony.
 5. Jeśli klient wybierze plik HTML, należy dodać go do katalogu `osc-ogrodzenia/` i wdrożyć na serwer.
 6. Po wdrożeniu klient klika `Zweryfikuj`.
 7. Po weryfikacji należy wysłać sitemapę:
-   `https://tatara-kj.github.io/osc-ogrodzenia/sitemap.xml`
+   `https://oscogrodzenia.pl/sitemap.xml`
 
 ## Opinie Google
 

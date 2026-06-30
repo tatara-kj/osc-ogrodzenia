@@ -1,3 +1,5 @@
+document.documentElement.classList.add("js");
+
 const body = document.body;
 const navToggle = document.querySelector("[data-nav-toggle]");
 const nav = document.querySelector("[data-nav]");
@@ -110,6 +112,43 @@ if (backToTop) {
   toggleBackToTop();
   window.addEventListener("scroll", toggleBackToTop, { passive: true });
 }
+
+const revealItems = document.querySelectorAll("[data-reveal]");
+if ("IntersectionObserver" in window) {
+  const revealObserver = new IntersectionObserver(
+    (entries, observer) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+        entry.target.classList.add("is-visible");
+        observer.unobserve(entry.target);
+      });
+    },
+    { rootMargin: "0px 0px -8% 0px", threshold: 0.12 },
+  );
+  revealItems.forEach((item) => revealObserver.observe(item));
+} else {
+  revealItems.forEach((item) => item.classList.add("is-visible"));
+}
+
+document.querySelectorAll("[data-elfsight-wrap]").forEach((wrap) => {
+  const app = wrap.querySelector('[class*="elfsight-app"]');
+  if (!app) return;
+
+  const markLoaded = () => {
+    if (app.children.length > 0 || app.querySelector("iframe")) {
+      wrap.classList.add("is-loaded");
+      return true;
+    }
+    return false;
+  };
+
+  if (markLoaded()) return;
+
+  const observer = new MutationObserver(() => {
+    if (markLoaded()) observer.disconnect();
+  });
+  observer.observe(app, { childList: true, subtree: true });
+});
 
 document.querySelectorAll(".footer__bottom").forEach((footerBottom) => {
   if (!footerBottom.querySelector('a[href="polityka-prywatnosci.html"]')) {

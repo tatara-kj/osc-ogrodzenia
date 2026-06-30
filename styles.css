@@ -802,18 +802,65 @@ h3 {
   background: var(--white);
   box-shadow: var(--shadow);
 }
-.google-reviews__fallback {
-  display: grid;
-  gap: 14px;
-  padding: clamp(26px, 5vw, 46px);
+.google-reviews--elfsight {
+  padding: clamp(22px, 4vw, 38px);
 }
-.google-reviews__fallback h3 {
-  margin: 0;
+.reviews-panel {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 24px;
+  margin-bottom: 22px;
+}
+.reviews-panel h3 {
+  margin: 8px 0 8px;
   font-family: "Barlow Condensed";
-  font-size: clamp(1.9rem, 4vw, 2.7rem);
+  font-size: clamp(2rem, 4vw, 3rem);
+  line-height: 0.95;
   text-transform: uppercase;
 }
-.google-reviews__fallback p {
+.reviews-panel p {
+  max-width: 720px;
+  margin: 0;
+  color: var(--steel);
+}
+.reviews-meta {
+  display: inline-flex;
+  align-items: center;
+  min-height: 34px;
+  padding: 8px 13px;
+  border: 1px solid rgba(242, 106, 33, 0.28);
+  background: rgba(242, 106, 33, 0.1);
+  color: var(--amber-dark);
+  font-size: 0.78rem;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.elfsight-widget-wrap {
+  position: relative;
+  min-height: 240px;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  background: #fff;
+}
+.elfsight-widget-wrap.is-loaded .elfsight-fallback {
+  display: none;
+}
+.elfsight-fallback {
+  display: grid;
+  gap: 13px;
+  padding: clamp(24px, 5vw, 42px);
+  background: linear-gradient(135deg, #fff, #f5f5f5);
+}
+.elfsight-fallback h3 {
+  margin: 0;
+  font-family: "Barlow Condensed";
+  font-size: clamp(1.8rem, 4vw, 2.55rem);
+  line-height: 1;
+  text-transform: uppercase;
+}
+.elfsight-fallback p {
   max-width: 780px;
   margin: 0;
   color: var(--steel);
@@ -843,55 +890,41 @@ h3 {
 }
 .map-card {
   position: relative;
-  min-height: 420px;
-  display: grid;
-  place-items: center;
+  min-height: 500px;
+  display: block;
   overflow: hidden;
-  padding: 40px;
-  background:
-    linear-gradient(
-        32deg,
-        transparent 47%,
-        rgba(24, 33, 42, 0.09) 48%,
-        rgba(24, 33, 42, 0.09) 51%,
-        transparent 52%
-      )
-      0 0 / 160px 160px,
-    linear-gradient(
-        -24deg,
-        transparent 47%,
-        rgba(24, 33, 42, 0.07) 48%,
-        rgba(24, 33, 42, 0.07) 51%,
-        transparent 52%
-      )
-      30px 20px / 130px 130px,
-    #e9ecef;
+  background: #111820;
 }
-.map-card__pin {
-  max-width: 390px;
-  padding: 32px;
-  background: white;
+.map-embed {
+  width: 100%;
+  height: 100%;
+  min-height: 500px;
+  border: 0;
+  filter: grayscale(1) contrast(1.04);
+}
+.map-card__overlay {
+  position: absolute;
+  right: clamp(18px, 4vw, 44px);
+  bottom: clamp(18px, 4vw, 44px);
+  display: grid;
+  gap: 14px;
+  max-width: 360px;
+  padding: 24px;
+  border-left: 4px solid var(--amber);
+  background: rgba(255, 255, 255, 0.94);
   box-shadow: var(--shadow);
-  text-align: center;
+  backdrop-filter: blur(12px);
 }
-.map-card__pin::before {
+.map-card__overlay strong {
   display: block;
-  margin-bottom: 12px;
-  content: "●";
-  color: var(--amber);
-  font-size: 2.5rem;
-  line-height: 1;
-}
-.map-card__pin strong {
-  display: block;
-  margin-bottom: 7px;
   font-family: "Barlow Condensed";
   font-size: 2rem;
+  line-height: 1;
   text-transform: uppercase;
 }
-.map-card__pin p {
-  margin-bottom: 20px;
+.map-card__overlay span {
   color: var(--steel);
+  font-size: 0.95rem;
 }
 
 .form-layout {
@@ -1233,6 +1266,17 @@ h3 {
   opacity: 1;
   transform: none;
 }
+html.js [data-reveal] {
+  opacity: 0;
+  transform: translateY(18px);
+  transition:
+    opacity 0.55s ease,
+    transform 0.55s ease;
+}
+html.js [data-reveal].is-visible {
+  opacity: 1;
+  transform: none;
+}
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
@@ -1241,9 +1285,11 @@ h3 {
     transition-duration: 0.01ms !important;
     animation-duration: 0.01ms !important;
   }
-  [data-reveal] {
+  [data-reveal],
+  html.js [data-reveal] {
     opacity: 1;
     transform: none;
+    transition: none !important;
   }
 }
 
@@ -1396,6 +1442,19 @@ h3 {
   .area {
     grid-template-columns: 1fr;
   }
+  .reviews-panel {
+    align-items: stretch;
+    flex-direction: column;
+  }
+  .reviews-panel .btn {
+    width: 100%;
+  }
+  .google-reviews--elfsight {
+    padding: 18px;
+  }
+  .elfsight-widget-wrap {
+    min-height: 260px;
+  }
   .split__media {
     order: -1;
   }
@@ -1440,6 +1499,18 @@ h3 {
   }
   .area__content {
     padding: 46px 24px;
+  }
+  .map-card,
+  .map-embed {
+    min-height: 360px;
+  }
+  .map-card__overlay {
+    position: relative;
+    right: auto;
+    bottom: auto;
+    max-width: none;
+    border-left: 0;
+    border-top: 4px solid var(--amber);
   }
   .cta-band__inner {
     align-items: stretch;

@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://tatara-kj.github.io/osc-ogrodzenia/sitemap.xml
+Sitemap: https://oscogrodzenia.pl/sitemap.xml

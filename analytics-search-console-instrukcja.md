@@ -12,7 +12,7 @@ Rekomendowany wariant:
 2. Wchodzi na stronę `https://analytics.google.com/`.
 3. Tworzy konto lub usługę GA4 dla strony OSC Ogrodzenia.
 4. Tworzy strumień danych typu „Sieć” dla adresu:
-   `https://tatara-kj.github.io/osc-ogrodzenia/`
+   `https://oscogrodzenia.pl/`
 5. Kopiuje Measurement ID w formacie `G-XXXXXXXXXX`.
 6. Measurement ID należy wpisać w plikach HTML w miejscu:
    `window.OSC_GA4_MEASUREMENT_ID = "";`
@@ -41,7 +41,7 @@ Konfiguracja:
 2. Wchodzi na `https://search.google.com/search-console`.
 3. Dodaje usługę typu „Prefiks adresu URL”.
 4. Wpisuje adres:
-   `https://tatara-kj.github.io/osc-ogrodzenia/`
+   `https://oscogrodzenia.pl/`
 5. Wybiera metodę weryfikacji.
 
 Najprostsze metody:
@@ -51,7 +51,7 @@ Najprostsze metody:
 
 Po weryfikacji w Search Console trzeba zgłosić sitemapę:
 
-`https://tatara-kj.github.io/osc-ogrodzenia/sitemap.xml`
+`https://oscogrodzenia.pl/sitemap.xml`
 
 ## 4. Co jest już przygotowane na stronie
 
