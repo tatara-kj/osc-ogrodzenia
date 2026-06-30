@@ -17,26 +17,27 @@
     <meta name="theme-color" content="#2B2B2B" />
     <link rel="canonical" href="https://oscogrodzenia.pl/kontakt.html" />
     <link rel="icon" href="assets/favicon-osc.png" type="image/png" />
+    <meta name="google-site-verification" content="TFYpZ7Ur2OnawWVZTxVvX3ml-ZfWDqzy_1ZqeU2eyeQ" />
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-LFLEJD1ES2"></script>
     <script>
-      window.OSC_GA4_MEASUREMENT_ID = "";
+      window.OSC_GA4_ID = "G-LFLEJD1ES2";
+      window.OSC_ANALYTICS_CONFIGURED = false;
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){window.dataLayer.push(arguments);}
+      window.gtag = window.gtag || gtag;
+      window.gtag("consent", "default", { analytics_storage: "denied" });
+      window.gtag("js", new Date());
+      try {
+        if (localStorage.getItem("osc_cookie_consent") === "accepted") {
+          window.gtag("consent", "update", { analytics_storage: "granted" });
+          window.gtag("config", window.OSC_GA4_ID);
+          window.OSC_ANALYTICS_CONFIGURED = true;
+        }
+      } catch (error) {
+        window.gtag("consent", "update", { analytics_storage: "denied" });
+      }
     </script>
-    <script>
-      (() => {
-        const id = window.OSC_GA4_MEASUREMENT_ID;
-        if (!id || id === "G-XXXXXXXXXX") return;
-        const script = document.createElement("script");
-        script.async = true;
-        script.src = `https://www.googletagmanager.com/gtag/js?id=${encodeURIComponent(id)}`;
-        document.head.append(script);
-        window.dataLayer = window.dataLayer || [];
-        window.gtag = function gtag() {
-          window.dataLayer.push(arguments);
-        };
-        window.gtag("js", new Date());
-        window.gtag("config", id);
-      })();
-    </script>
-    <link rel="stylesheet" href="styles.css?v=20260630-final" />
+    <link rel="stylesheet" href="styles.css?v=20260630-tech" />
   </head>
   <body>
     <a class="skip-link" href="#main">Przejdź do treści</a>
@@ -128,7 +129,38 @@
               Pola oznaczone gwiazdką są potrzebne do kontaktu w sprawie
               zapytania.
             </p>
-            <form class="form" data-estimate-form>
+            <form
+              class="form"
+              action="https://api.web3forms.com/submit"
+              method="POST"
+              data-estimate-form
+            >
+              <input
+                type="hidden"
+                name="access_key"
+                value="c82a68d8-1743-4cab-b032-28eb542bfbe3"
+              />
+              <input
+                type="hidden"
+                name="subject"
+                value="Nowe zapytanie ze strony OSC Ogrodzenia"
+              />
+              <input
+                type="hidden"
+                name="from_name"
+                value="Formularz strony OSC Ogrodzenia"
+              />
+              <div class="botcheck-field" aria-hidden="true">
+                <label>
+                  Nie wypełniaj tego pola
+                  <input
+                    type="checkbox"
+                    name="botcheck"
+                    tabindex="-1"
+                    autocomplete="off"
+                  />
+                </label>
+              </div>
               <div class="field">
                 <label for="imie">Imię *</label
                 ><input id="imie" name="imie" autocomplete="name" required />
@@ -193,7 +225,12 @@
               </div>
               <div class="field field--full">
                 <label class="choice"
-                  ><input type="checkbox" required /> Zgadzam się na kontakt w
+                  ><input
+                    type="checkbox"
+                    name="zgoda_rodo"
+                    value="Tak"
+                    required
+                  /> Zgadzam się na kontakt w
                   sprawie zapytania i akceptuję
                   <a class="privacy-link" href="polityka-prywatnosci.html"
                     >politykę prywatności</a
@@ -202,12 +239,19 @@
               </div>
               <div class="field field--full">
                 <button class="btn" type="submit">
-                  Przygotuj zapytanie e-mail
+                  Wyślij zapytanie o wycenę
                 </button>
                 <p class="form-note">
-                  Otworzymy gotową wiadomość do OSC. W programie pocztowym
-                  możesz dołączyć zdjęcie posesji, bramy lub napędu.
+                  Formularz wyśle zgłoszenie bezpośrednio do OSC. Jeśli chcesz
+                  dodać zdjęcie, możesz dosłać je później w wiadomości e-mail.
                 </p>
+                <a
+                  class="btn btn--outline form-fallback"
+                  href="mailto:ogrodzeniasc@gmail.com?subject=Zapytanie%20ze%20strony%20OSC%20Ogrodzenia"
+                  data-mailto-fallback
+                  hidden
+                  >Wyślij e-mail ręcznie</a
+                >
                 <div class="form-status" aria-live="polite"></div>
               </div>
             </form>

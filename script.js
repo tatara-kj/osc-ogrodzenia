@@ -73,19 +73,22 @@ document.querySelectorAll("[data-estimate-form]").forEach((form) => {
       link.href = "#wycena";
     });
   const status = form.querySelector(".form-status");
-  form.addEventListener("submit", (event) => {
-    event.preventDefault();
-    if (!form.checkValidity()) {
-      form.reportValidity();
-      return;
-    }
-    const data = new FormData(form);
-    const name = String(data.get("imie") || "").trim();
+  const submitButton = form.querySelector('button[type="submit"]');
+  const fallbackButton = form.querySelector("[data-mailto-fallback]");
+  let submitted = false;
+
+  const setStatus = (message, type = "info") => {
+    if (!status) return;
+    status.textContent = message;
+    status.className = `form-status form-status--${type}`;
+  };
+
+  const createMailto = (data) => {
     const subject = "Zapytanie ze strony OSC Ogrodzenia";
     const bodyText = [
-      "Nowe zapytanie ze strony OSC Ogrodzenia",
+      "Zapytanie ze strony OSC Ogrodzenia",
       "",
-      `Imię: ${name}`,
+      `Imię: ${data.get("imie") || ""}`,
       `Telefon: ${data.get("telefon") || ""}`,
       `E-mail: ${data.get("email") || ""}`,
       `Miejscowość: ${data.get("miejscowosc") || ""}`,
@@ -93,10 +96,64 @@ document.querySelectorAll("[data-estimate-form]").forEach((form) => {
       `Orientacyjny wymiar: ${data.get("dlugosc") || ""}`,
       `Opis: ${data.get("opis") || ""}`,
       "",
-      "Jeżeli klient ma zdjęcia posesji, bramy lub napędu, może dołączyć je w odpowiedzi na tę wiadomość.",
+      "Jeżeli chcesz, dołącz zdjęcia posesji, bramy lub napędu do tej wiadomości.",
     ].join("\n");
-    status.textContent = `Dziękujemy${name ? `, ${name}` : ""}. Otwieramy gotową wiadomość do OSC.`;
-    window.location.href = `mailto:ogrodzeniasc@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(bodyText)}`;
+    return `mailto:ogrodzeniasc@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(bodyText)}`;
+  };
+
+  form.addEventListener("submit", async (event) => {
+    event.preventDefault();
+    if (submitted || form.dataset.submitting === "true") return;
+    if (!form.checkValidity()) {
+      form.reportValidity();
+      return;
+    }
+    const data = new FormData(form);
+    if (data.get("botcheck")) return;
+    const name = String(data.get("imie") || "").trim();
+    const endpoint = form.getAttribute("action") || "https://api.web3forms.com/submit";
+    if (fallbackButton) {
+      fallbackButton.href = createMailto(data);
+      fallbackButton.hidden = true;
+    }
+    form.dataset.submitting = "true";
+    submitButton.disabled = true;
+    submitButton.textContent = "Wysyłanie...";
+    setStatus("Wysyłamy zapytanie do OSC Ogrodzenia...", "info");
+
+    try {
+      const response = await fetch(endpoint, {
+        method: "POST",
+        body: data,
+        headers: { Accept: "application/json" },
+      });
+      const result = await response.json().catch(() => ({}));
+      if (!response.ok || result.success === false) {
+        throw new Error(result.message || "Błąd wysyłki formularza.");
+      }
+      submitted = true;
+      form.reset();
+      setStatus(
+        `Dziękujemy${name ? `, ${name}` : ""}. Zapytanie zostało wysłane. OSC skontaktuje się z Tobą telefonicznie lub mailowo.`,
+        "success",
+      );
+      submitButton.textContent = "Zapytanie wysłane";
+      if (window.OSC_ANALYTICS_CONFIGURED && typeof window.gtag === "function") {
+        window.gtag("event", "generate_lead", {
+          event_category: "formularz",
+          event_label: "OSC zapytanie",
+        });
+      }
+    } catch (error) {
+      setStatus(
+        "Nie udało się wysłać formularza. Zadzwoń pod numer 667 052 883 albo wyślij wiadomość na ogrodzeniasc@gmail.com.",
+        "error",
+      );
+      if (fallbackButton) fallbackButton.hidden = false;
+      form.dataset.submitting = "false";
+      submitButton.disabled = false;
+      submitButton.textContent = "Wyślij zapytanie o wycenę";
+    }
   });
 });
 
@@ -111,6 +168,77 @@ if (backToTop) {
   };
   toggleBackToTop();
   window.addEventListener("scroll", toggleBackToTop, { passive: true });
+}
+
+const consentKey = "osc_cookie_consent";
+const getConsent = () => {
+  try {
+    return localStorage.getItem(consentKey);
+  } catch (error) {
+    return null;
+  }
+};
+const setConsent = (value) => {
+  try {
+    localStorage.setItem(consentKey, value);
+  } catch (error) {
+    /* Brak dostępu do localStorage nie blokuje działania strony. */
+  }
+};
+const enableAnalytics = () => {
+  if (typeof window.gtag !== "function") return;
+  window.gtag("consent", "update", { analytics_storage: "granted" });
+  if (!window.OSC_ANALYTICS_CONFIGURED && window.OSC_GA4_ID) {
+    window.gtag("config", window.OSC_GA4_ID);
+    window.OSC_ANALYTICS_CONFIGURED = true;
+  }
+};
+const disableAnalytics = () => {
+  if (typeof window.gtag !== "function") return;
+  window.gtag("consent", "update", { analytics_storage: "denied" });
+  window.OSC_ANALYTICS_CONFIGURED = false;
+};
+const showCookieBanner = () => {
+  if (document.querySelector("[data-cookie-banner]")) return;
+  const banner = document.createElement("section");
+  banner.className = "cookie-banner";
+  banner.setAttribute("data-cookie-banner", "");
+  banner.setAttribute("aria-label", "Informacja o cookies");
+  banner.innerHTML = `
+    <div>
+      <h2>Cookies i usługi zewnętrzne</h2>
+      <p>
+        Strona wykorzystuje niezbędne pliki cookies, Google Analytics oraz
+        osadzone usługi zewnętrzne, w tym Google Maps i Elfsight Google Reviews.
+        Analitykę uruchamiamy dopiero po Twojej zgodzie.
+      </p>
+      <a href="polityka-prywatnosci.html">Polityka prywatności</a>
+    </div>
+    <div class="cookie-banner__actions">
+      <button class="btn btn--dark" type="button" data-cookie-reject>Odrzucam</button>
+      <button class="btn" type="button" data-cookie-accept>Akceptuję</button>
+    </div>
+  `;
+  document.body.append(banner);
+  banner.querySelector("[data-cookie-accept]").addEventListener("click", () => {
+    setConsent("accepted");
+    enableAnalytics();
+    banner.remove();
+  });
+  banner.querySelector("[data-cookie-reject]").addEventListener("click", () => {
+    setConsent("rejected");
+    disableAnalytics();
+    banner.remove();
+  });
+};
+const consent = getConsent();
+if (consent === "accepted") {
+  enableAnalytics();
+} else if (consent === "rejected") {
+  disableAnalytics();
+} else {
+  disableAnalytics();
+  showCookieBanner();
 }
 
 const revealItems = document.querySelectorAll("[data-reveal]");

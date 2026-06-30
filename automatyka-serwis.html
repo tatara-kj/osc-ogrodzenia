@@ -17,26 +17,27 @@
     <meta name="theme-color" content="#2B2B2B" />
     <link rel="canonical" href="https://oscogrodzenia.pl/automatyka-serwis.html" />
     <link rel="icon" href="assets/favicon-osc.png" type="image/png" />
+    <meta name="google-site-verification" content="TFYpZ7Ur2OnawWVZTxVvX3ml-ZfWDqzy_1ZqeU2eyeQ" />
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-LFLEJD1ES2"></script>
     <script>
-      window.OSC_GA4_MEASUREMENT_ID = "";
+      window.OSC_GA4_ID = "G-LFLEJD1ES2";
+      window.OSC_ANALYTICS_CONFIGURED = false;
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){window.dataLayer.push(arguments);}
+      window.gtag = window.gtag || gtag;
+      window.gtag("consent", "default", { analytics_storage: "denied" });
+      window.gtag("js", new Date());
+      try {
+        if (localStorage.getItem("osc_cookie_consent") === "accepted") {
+          window.gtag("consent", "update", { analytics_storage: "granted" });
+          window.gtag("config", window.OSC_GA4_ID);
+          window.OSC_ANALYTICS_CONFIGURED = true;
+        }
+      } catch (error) {
+        window.gtag("consent", "update", { analytics_storage: "denied" });
+      }
     </script>
-    <script>
-      (() => {
-        const id = window.OSC_GA4_MEASUREMENT_ID;
-        if (!id || id === "G-XXXXXXXXXX") return;
-        const script = document.createElement("script");
-        script.async = true;
-        script.src = `https://www.googletagmanager.com/gtag/js?id=${encodeURIComponent(id)}`;
-        document.head.append(script);
-        window.dataLayer = window.dataLayer || [];
-        window.gtag = function gtag() {
-          window.dataLayer.push(arguments);
-        };
-        window.gtag("js", new Date());
-        window.gtag("config", id);
-      })();
-    </script>
-    <link rel="stylesheet" href="styles.css?v=20260630-final" />
+    <link rel="stylesheet" href="styles.css?v=20260630-tech" />
   </head>
   <body>
     <a class="skip-link" href="#main">Przejdź do treści</a>

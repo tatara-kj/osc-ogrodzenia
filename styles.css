@@ -1023,10 +1023,26 @@ h3 {
   height: 18px;
   accent-color: var(--amber);
 }
+.botcheck-field {
+  position: absolute;
+  left: -9999px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
 .file-note,
 .form-note {
   color: var(--steel);
   font-size: 0.76rem;
+}
+.form-fallback {
+  width: fit-content;
+  margin-top: 10px;
+}
+.form button:disabled,
+.form .btn[aria-disabled="true"] {
+  cursor: wait;
+  opacity: 0.68;
 }
 .privacy-link {
   color: var(--amber-dark);
@@ -1035,8 +1051,16 @@ h3 {
 }
 .form-status {
   min-height: 24px;
-  color: var(--success);
   font-weight: 700;
+}
+.form-status--info {
+  color: var(--steel);
+}
+.form-status--success {
+  color: var(--success);
+}
+.form-status--error {
+  color: #b42318;
 }
 
 .cta-band {
@@ -1229,6 +1253,52 @@ h3 {
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
 }
 
+.cookie-banner {
+  position: fixed;
+  right: 18px;
+  bottom: 18px;
+  z-index: 1600;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 24px;
+  max-width: min(820px, calc(100% - 36px));
+  padding: 22px;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  background: rgba(13, 19, 25, 0.96);
+  color: white;
+  box-shadow: 0 22px 70px rgba(0, 0, 0, 0.34);
+  backdrop-filter: blur(14px);
+}
+.cookie-banner h2 {
+  margin: 0 0 8px;
+  font-family: "Barlow Condensed";
+  font-size: 1.8rem;
+  line-height: 1;
+  text-transform: uppercase;
+}
+.cookie-banner p {
+  max-width: 560px;
+  margin: 0 0 10px;
+  color: #d5dbe0;
+  font-size: 0.88rem;
+}
+.cookie-banner a {
+  color: var(--amber);
+  font-size: 0.86rem;
+  font-weight: 800;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.cookie-banner__actions {
+  display: flex;
+  align-items: end;
+  gap: 10px;
+}
+.cookie-banner__actions .btn {
+  min-height: 46px;
+  white-space: nowrap;
+}
+
 .back-to-top {
   position: fixed;
   right: 22px;
@@ -1369,6 +1439,21 @@ html.js [data-reveal].is-visible {
   }
   .mobile-actions {
     display: grid;
+  }
+  .cookie-banner {
+    right: 10px;
+    bottom: 132px;
+    left: 10px;
+    grid-template-columns: 1fr;
+    max-width: none;
+    padding: 18px;
+  }
+  .cookie-banner__actions {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+  .cookie-banner__actions .btn {
+    width: 100%;
   }
   .back-to-top {
     right: 14px;

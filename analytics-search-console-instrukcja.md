@@ -1,77 +1,56 @@
-# OSC Ogrodzenia — instrukcja Google Analytics 4 i Search Console
+# OSC Ogrodzenia — instrukcja GA4 i Search Console
 
-Ten plik opisuje, co trzeba zrobić po stronie Google, żeby strona OSC Ogrodzenia miała analitykę, Search Console i pełny dostęp dla właściciela firmy.
+Ten plik opisuje aktualny stan techniczny po wdrożeniu analityki i weryfikacji Google.
 
-## 1. Google Analytics 4 — najlepszy wariant dostępu
+## 1. Google Analytics 4
 
-Najlepiej, żeby właściciel firmy miał własny dostęp administracyjny do usługi Google Analytics. Wykonawca strony może pomóc w konfiguracji, ale konto nie powinno zostać wyłącznie u wykonawcy.
+Na stronie jest wdrożony Google Analytics 4:
 
-Rekomendowany wariant:
+`G-LFLEJD1ES2`
 
-1. Właściciel loguje się na swoje konto Google.
-2. Wchodzi na stronę `https://analytics.google.com/`.
-3. Tworzy konto lub usługę GA4 dla strony OSC Ogrodzenia.
-4. Tworzy strumień danych typu „Sieć” dla adresu:
-   `https://oscogrodzenia.pl/`
-5. Kopiuje Measurement ID w formacie `G-XXXXXXXXXX`.
-6. Measurement ID należy wpisać w plikach HTML w miejscu:
-   `window.OSC_GA4_MEASUREMENT_ID = "";`
+Tag znajduje się w sekcji `<head>` wszystkich podstron. Nie ma starego pustego identyfikatora ani drugiego równoległego tagu Analytics.
 
-Po wpisaniu prawdziwego ID skrypt GA4 zacznie ładować tag Google Analytics. Obecnie ID jest puste, więc strona nie udaje działającej analityki i nie używa fikcyjnego identyfikatora.
+Analityka działa z banerem cookies:
 
-## 2. Jak dodać klienta jako użytkownika GA4
+- przed wyborem użytkownika analityka ma status `denied`,
+- po kliknięciu „Akceptuję” uruchamia się GA4,
+- po kliknięciu „Odrzucam” analityka pozostaje wyłączona.
 
-Jeśli usługę GA4 zakłada wykonawca:
+## 2. Search Console
 
-1. W Google Analytics należy wejść w „Administracja”.
-2. Wybrać konto lub usługę strony OSC Ogrodzenia.
-3. Wejść w „Zarządzanie dostępem”.
-4. Dodać adres e-mail właściciela firmy.
-5. Nadać rolę co najmniej „Edytujący”, a najlepiej pełne uprawnienia administracyjne, jeśli właściciel ma zarządzać usługą.
+Na stronie dodano meta tag weryfikacyjny:
 
-Po zakończeniu projektu właściciel powinien mieć stały dostęp do danych.
+`TFYpZ7Ur2OnawWVZTxVvX3ml-ZfWDqzy_1ZqeU2eyeQ`
 
-## 3. Google Search Console
+W Google Search Console należy dodać usługę dla:
 
-Search Console pozwala sprawdzić indeksowanie strony w Google i zgłosić sitemapę.
+`https://oscogrodzenia.pl`
 
-Konfiguracja:
+Po dodaniu usługi można kliknąć „Zweryfikuj”.
 
-1. Właściciel lub wykonawca loguje się na konto Google.
-2. Wchodzi na `https://search.google.com/search-console`.
-3. Dodaje usługę typu „Prefiks adresu URL”.
-4. Wpisuje adres:
-   `https://oscogrodzenia.pl/`
-5. Wybiera metodę weryfikacji.
+## 3. Sitemap i robots
 
-Najprostsze metody:
+Pliki są gotowe:
 
-- meta tag HTML — tag należy wkleić w sekcji `<head>` każdej głównej podstrony,
-- plik HTML — plik weryfikacyjny należy dodać do katalogu `osc-ogrodzenia/` i wdrożyć stronę.
+- `https://oscogrodzenia.pl/sitemap.xml`,
+- `https://oscogrodzenia.pl/robots.txt`.
 
-Po weryfikacji w Search Console trzeba zgłosić sitemapę:
+Po weryfikacji w Search Console warto zgłosić sitemapę.
 
-`https://oscogrodzenia.pl/sitemap.xml`
+## 4. SEO techniczne
 
-## 4. Co jest już przygotowane na stronie
+Strona ma:
 
-Strona ma przygotowane:
-
-- miejsce na GA4 Measurement ID,
-- canonicale na podstronach,
-- `sitemap.xml`,
-- `robots.txt`,
-- schema.org `LocalBusiness` na stronie głównej,
+- canonicale na domenę `https://oscogrodzenia.pl`,
 - meta title i meta description dla podstron,
-- linki do profilu Google Maps i Facebooka.
+- Open Graph,
+- schema.org `LocalBusiness` na stronie głównej,
+- finalne menu bez osobnej zakładki „Bramy i furtki”.
 
-## 5. Opinie Google
+## 5. Formularz
 
-Na stronie nie ma wpisanych fikcyjnych opinii ani sztucznych nazwisk. Sekcja opinii prowadzi użytkownika do prawdziwego profilu Google Maps OSC Ogrodzenia.
+Formularze na stronie głównej i w kontakcie działają przez Web3Forms. W razie błędu użytkownik dostaje komunikat i przycisk „Wyślij e-mail ręcznie”.
 
-Jeśli właściciel chce w przyszłości pokazać opinie bezpośrednio na stronie, można dodać:
+## 6. Opinie Google
 
-- widget Google Reviews z narzędzia typu Trustindex lub Elfsight,
-- albo integrację z Google Places API.
-
-Przed wdrożeniem widgetu trzeba sprawdzić wygląd na telefonie i wpływ na szybkość strony.
+Opinie Google są osadzone przez Elfsight Google Reviews na stronie głównej i podstronie „Opinie”. Polityka prywatności oraz baner cookies informują o tej usłudze.

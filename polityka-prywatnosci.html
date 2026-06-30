@@ -6,37 +6,38 @@
     <title>Polityka prywatności — OSC Ogrodzenia</title>
     <meta
       name="description"
-      content="Informacje o przetwarzaniu danych przekazywanych przy kontakcie z OSC Ogrodzenia Sebastian Charuk."
+      content="Polityka prywatności OSC Ogrodzenia: formularz kontaktowy, Web3Forms, Google Analytics, cookies, Google Maps i Elfsight Google Reviews."
     />
     <meta name="robots" content="noindex,follow" />
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://oscogrodzenia.pl/polityka-prywatnosci.html" />
     <meta property="og:title" content="Polityka prywatności — OSC Ogrodzenia" />
-    <meta property="og:description" content="Informacje o przetwarzaniu danych przekazywanych przy kontakcie z OSC Ogrodzenia Sebastian Charuk." />
+    <meta property="og:description" content="Informacje o formularzu kontaktowym, cookies, Google Analytics, Google Maps i Elfsight Google Reviews." />
     <meta property="og:image" content="https://oscogrodzenia.pl/assets/fb/osc-fb-01.jpg" />
     <meta name="theme-color" content="#2B2B2B" />
     <link rel="canonical" href="https://oscogrodzenia.pl/polityka-prywatnosci.html" />
     <link rel="icon" href="assets/favicon-osc.png" type="image/png" />
+    <meta name="google-site-verification" content="TFYpZ7Ur2OnawWVZTxVvX3ml-ZfWDqzy_1ZqeU2eyeQ" />
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-LFLEJD1ES2"></script>
     <script>
-      window.OSC_GA4_MEASUREMENT_ID = "";
+      window.OSC_GA4_ID = "G-LFLEJD1ES2";
+      window.OSC_ANALYTICS_CONFIGURED = false;
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){window.dataLayer.push(arguments);}
+      window.gtag = window.gtag || gtag;
+      window.gtag("consent", "default", { analytics_storage: "denied" });
+      window.gtag("js", new Date());
+      try {
+        if (localStorage.getItem("osc_cookie_consent") === "accepted") {
+          window.gtag("consent", "update", { analytics_storage: "granted" });
+          window.gtag("config", window.OSC_GA4_ID);
+          window.OSC_ANALYTICS_CONFIGURED = true;
+        }
+      } catch (error) {
+        window.gtag("consent", "update", { analytics_storage: "denied" });
+      }
     </script>
-    <script>
-      (() => {
-        const id = window.OSC_GA4_MEASUREMENT_ID;
-        if (!id || id === "G-XXXXXXXXXX") return;
-        const script = document.createElement("script");
-        script.async = true;
-        script.src = `https://www.googletagmanager.com/gtag/js?id=${encodeURIComponent(id)}`;
-        document.head.append(script);
-        window.dataLayer = window.dataLayer || [];
-        window.gtag = function gtag() {
-          window.dataLayer.push(arguments);
-        };
-        window.gtag("js", new Date());
-        window.gtag("config", id);
-      })();
-    </script>
-    <link rel="stylesheet" href="styles.css?v=20260630-final" />
+    <link rel="stylesheet" href="styles.css?v=20260630-tech" />
   </head>
   <body>
     <a class="skip-link" href="#main">Przejdź do treści</a>
@@ -77,7 +78,7 @@
           <article class="content-card">
             <h2>Administrator danych</h2>
             <p>
-              Administratorem danych przekazanych w zapytaniu jest OSC
+              Administratorem danych przekazanych przez stronę jest OSC
               Ogrodzenia Sebastian Charuk, Wolności 33B, 44-177 Chudów. Kontakt:
               <a class="privacy-link" href="mailto:ogrodzeniasc@gmail.com"
                 >ogrodzeniasc@gmail.com</a
@@ -86,46 +87,69 @@
             </p>
           </article>
           <article class="content-card">
-            <h2>Cel przetwarzania</h2>
+            <h2>Formularz kontaktowy</h2>
             <p>
-              Dane są wykorzystywane do odpowiedzi na zapytanie, omówienia
-              wyceny, realizacji usługi lub obsługi zgłoszenia serwisowego.
-              Podanie danych jest dobrowolne, ale numer telefonu jest potrzebny
-              do kontaktu.
+              Formularz służy do wysłania zapytania o ogrodzenie, bramę,
+              automatykę lub serwis. Prosimy o imię, telefon, miejscowość,
+              rodzaj usługi, orientacyjny wymiar, opcjonalny e-mail i krótki
+              opis sprawy. Telefon jest potrzebny, żeby szybko wrócić z
+              odpowiedzią.
             </p>
           </article>
           <article class="content-card">
-            <h2>Zakres danych</h2>
+            <h2>Cel przetwarzania danych</h2>
             <p>
-              Strona prosi wyłącznie o imię, telefon, opcjonalny e-mail,
-              miejscowość, rodzaj usługi i opis zapytania. Formularz nie
-              zapisuje danych na stronie — przygotowuje wiadomość w programie
-              pocztowym użytkownika.
+              Dane wykorzystujemy do odpowiedzi na zapytanie, przygotowania
+              rozmowy o wycenie, obsługi zgłoszenia serwisowego i ewentualnej
+              realizacji usługi. Podanie danych jest dobrowolne, ale bez danych
+              kontaktowych nie da się odpowiedzieć na zgłoszenie.
             </p>
           </article>
           <article class="content-card">
-            <h2>Okres i odbiorcy</h2>
+            <h2>Web3Forms</h2>
             <p>
-              Dane mogą być przechowywane przez czas potrzebny do obsługi
-              zapytania i ewentualnej realizacji usługi oraz przez okres
-              wymagany przepisami. Mogą być przetwarzane przez dostawcę poczty
-              elektronicznej używanej do korespondencji.
+              Formularz jest obsługiwany przez usługę Web3Forms, która
+              technicznie przekazuje wiadomość z formularza na adres e-mail OSC
+              Ogrodzenia. Dane nie są publikowane na stronie i trafiają do firmy
+              jako zgłoszenie kontaktowe.
+            </p>
+          </article>
+          <article class="content-card">
+            <h2>Google Analytics i cookies</h2>
+            <p>
+              Strona korzysta z Google Analytics 4 wyłącznie po kliknięciu
+              „Akceptuję” w banerze cookies. Analityka pomaga sprawdzić, które
+              sekcje strony są używane i czy strona generuje kontakt. Po
+              kliknięciu „Odrzucam” analityka pozostaje wyłączona.
+            </p>
+          </article>
+          <article class="content-card">
+            <h2>Usługi zewnętrzne na stronie</h2>
+            <p>
+              Na stronie mogą być osadzone zewnętrzne elementy: Google Maps jako
+              mapa dojazdu oraz Elfsight Google Reviews jako widget opinii
+              Google. Te usługi mogą przetwarzać podstawowe dane techniczne
+              zgodnie z zasadami swoich dostawców.
+            </p>
+          </article>
+          <article class="content-card">
+            <h2>Okres przechowywania</h2>
+            <p>
+              Dane z zapytań przechowujemy przez czas potrzebny do obsługi
+              kontaktu, przygotowania wyceny, realizacji usługi lub obrony przed
+              ewentualnymi roszczeniami. Korespondencja może być zachowana w
+              skrzynce e-mail firmy.
             </p>
           </article>
           <article class="content-card">
             <h2>Prawa użytkownika</h2>
             <p>
-              Możesz poprosić o dostęp do danych, ich sprostowanie, usunięcie
-              lub ograniczenie przetwarzania. W tym celu skontaktuj się z firmą
-              przez e-mail lub telefon.
-            </p>
-          </article>
-          <article class="content-card">
-            <h2>Usługi zewnętrzne</h2>
-            <p>
-              Strona zawiera linki do Google Maps, opinii Google i Facebooka.
-              Usługi te otwierają się dopiero po kliknięciu. Obowiązują w nich
-              zasady prywatności ich operatorów.
+              Możesz poprosić o dostęp do swoich danych, sprostowanie, usunięcie
+              albo ograniczenie przetwarzania. W tej sprawie skontaktuj się z
+              firmą telefonicznie lub przez e-mail:
+              <a class="privacy-link" href="mailto:ogrodzeniasc@gmail.com"
+                >ogrodzeniasc@gmail.com</a
+              >.
             </p>
           </article>
         </div>
