@@ -552,10 +552,33 @@ h3 {
 .split__media {
   position: relative;
 }
-.split__media img {
+.split__media > img {
   width: 100%;
   min-height: 520px;
   object-fit: cover;
+}
+.split__media--tiles {
+  min-height: 440px;
+  display: grid;
+  align-items: stretch;
+  padding: 14px;
+  background:
+    linear-gradient(135deg, rgba(242, 106, 33, 0.14), transparent 42%),
+    #111820;
+}
+.split-gallery {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  gap: 12px;
+}
+.split-gallery img {
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+  object-fit: cover;
+  background: var(--anthracite);
+  filter: contrast(1.05) saturate(0.92);
 }
 .split__badge {
   position: absolute;
@@ -1127,10 +1150,19 @@ h3 {
   grid-template-columns: repeat(3, 1fr);
   gap: 18px;
 }
+.feature-grid--types {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  align-items: stretch;
+}
 .feature {
   padding: 30px;
   background: white;
   border-top: 4px solid var(--amber);
+}
+.feature--visual {
+  display: grid;
+  grid-template-rows: auto auto 1fr;
+  gap: 18px;
 }
 .feature__icon {
   color: var(--amber-dark);
@@ -1147,6 +1179,22 @@ h3 {
   color: var(--steel);
   font-size: 0.92rem;
 }
+.feature__media {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-top: 6px;
+}
+.feature__media img {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  background: var(--anthracite);
+  filter: contrast(1.04) saturate(0.95);
+}
+.feature__media img:first-child {
+  object-position: center;
+}
 .content-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -1155,6 +1203,15 @@ h3 {
 .content-card {
   padding: clamp(28px, 4vw, 46px);
   background: white;
+}
+.section--dark .content-card {
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-top: 4px solid var(--amber);
+  background: #131a21;
+  color: white;
+}
+.section--dark .content-card p {
+  color: #c3cad0;
 }
 .content-card h2 {
   font-size: clamp(2rem, 4vw, 3rem);
@@ -1543,8 +1600,17 @@ html.js [data-reveal].is-visible {
   .split__media {
     order: -1;
   }
-  .split__media img {
+  .split__media > img {
     min-height: 350px;
+  }
+  .split__media--tiles {
+    min-height: 0;
+  }
+  .split-gallery {
+    grid-template-columns: 1fr 1fr;
+  }
+  .split-gallery img {
+    aspect-ratio: 1 / 1;
   }
   .split__badge {
     right: 12px;
