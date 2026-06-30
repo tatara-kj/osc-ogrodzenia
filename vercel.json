@@ -1,0 +1,15 @@
+{
+  "redirects": [
+    {
+      "source": "/:path*",
+      "has": [
+        {
+          "type": "host",
+          "value": "oscogrodzenia.pl"
+        }
+      ],
+      "destination": "https://www.oscogrodzenia.pl/:path*",
+      "permanent": true
+    }
+  ]
+}

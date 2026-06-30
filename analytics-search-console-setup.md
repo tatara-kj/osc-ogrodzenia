@@ -9,8 +9,8 @@ Na stronie wdrożono:
 - baner cookies z opcjami „Akceptuję” i „Odrzucam”,
 - meta tag Google Search Console:
   `TFYpZ7Ur2OnawWVZTxVvX3ml-ZfWDqzy_1ZqeU2eyeQ`,
-- sitemapę: `https://oscogrodzenia.pl/sitemap.xml`,
-- canonicale wskazujące na domenę `https://oscogrodzenia.pl`,
+- sitemapę: `https://www.oscogrodzenia.pl/sitemap.xml`,
+- canonicale wskazujące na domenę `https://www.oscogrodzenia.pl`,
 - widget Elfsight Google Reviews na stronie głównej i podstronie opinii.
 
 ## Google Analytics 4
@@ -23,13 +23,13 @@ Właściciel firmy powinien mieć dostęp administracyjny do usługi GA4. Jeśli
 
 W Search Console należy dodać usługę dla adresu:
 
-`https://oscogrodzenia.pl`
+`https://www.oscogrodzenia.pl`
 
 Następnie można kliknąć „Zweryfikuj”, ponieważ meta tag weryfikacyjny jest już dodany do strony.
 
 Po weryfikacji warto zgłosić sitemapę:
 
-`https://oscogrodzenia.pl/sitemap.xml`
+`https://www.oscogrodzenia.pl/sitemap.xml`
 
 ## Opinie Google
 

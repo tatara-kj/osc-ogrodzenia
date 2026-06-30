@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://oscogrodzenia.pl/sitemap.xml
+Sitemap: https://www.oscogrodzenia.pl/sitemap.xml

@@ -24,7 +24,7 @@ Na stronie dodano meta tag weryfikacyjny:
 
 W Google Search Console należy dodać usługę dla:
 
-`https://oscogrodzenia.pl`
+`https://www.oscogrodzenia.pl`
 
 Po dodaniu usługi można kliknąć „Zweryfikuj”.
 
@@ -32,8 +32,8 @@ Po dodaniu usługi można kliknąć „Zweryfikuj”.
 
 Pliki są gotowe:
 
-- `https://oscogrodzenia.pl/sitemap.xml`,
-- `https://oscogrodzenia.pl/robots.txt`.
+- `https://www.oscogrodzenia.pl/sitemap.xml`,
+- `https://www.oscogrodzenia.pl/robots.txt`.
 
 Po weryfikacji w Search Console warto zgłosić sitemapę.
 
@@ -41,7 +41,7 @@ Po weryfikacji w Search Console warto zgłosić sitemapę.
 
 Strona ma:
 
-- canonicale na domenę `https://oscogrodzenia.pl`,
+- canonicale na domenę `https://www.oscogrodzenia.pl`,
 - meta title i meta description dla podstron,
 - Open Graph,
 - schema.org `LocalBusiness` na stronie głównej,

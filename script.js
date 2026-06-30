@@ -59,8 +59,35 @@ document.addEventListener("keydown", (event) => {
 
 document.querySelectorAll("[data-compare]").forEach((compare) => {
   const range = compare.querySelector("input");
-  range?.addEventListener("input", () => {
-    compare.style.setProperty("--position", `${range.value}%`);
+  if (!range) return;
+  const setPosition = (value) => {
+    const position = Math.max(0, Math.min(100, Number(value)));
+    range.value = String(position);
+    compare.style.setProperty("--position", `${position}%`);
+  };
+  const setPositionFromPointer = (event) => {
+    const rect = compare.getBoundingClientRect();
+    const x = event.clientX - rect.left;
+    setPosition((x / rect.width) * 100);
+  };
+  let dragging = false;
+
+  setPosition(range.value || 50);
+  range.addEventListener("input", () => setPosition(range.value));
+  compare.addEventListener("pointerdown", (event) => {
+    dragging = true;
+    setPositionFromPointer(event);
+    range.focus({ preventScroll: true });
+    event.target.setPointerCapture?.(event.pointerId);
+  });
+  compare.addEventListener("pointermove", (event) => {
+    if (!dragging) return;
+    setPositionFromPointer(event);
+  });
+  ["pointerup", "pointercancel", "pointerleave"].forEach((eventName) => {
+    compare.addEventListener(eventName, () => {
+      dragging = false;
+    });
   });
 });
 
