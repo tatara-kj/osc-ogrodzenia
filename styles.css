@@ -1215,6 +1215,14 @@ html:not(.js) .before-after {
 .form-fallback {
   width: fit-content;
   margin-top: 10px;
+  border-color: var(--anthracite);
+  background: var(--anthracite);
+  color: var(--white);
+}
+.form-fallback:hover {
+  border-color: var(--amber);
+  background: var(--amber);
+  color: var(--ink);
 }
 .form button:disabled,
 .form .btn[aria-disabled="true"] {
@@ -1798,22 +1806,40 @@ html.js [data-reveal].is-visible {
   }
   .split__media {
     order: -1;
+    max-width: 100%;
+    overflow: hidden;
   }
   .split__media > img {
-    min-height: 350px;
+    display: block;
+    min-height: 0;
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
   }
   .split__media--tiles {
     min-height: 0;
+    display: block;
+    padding: 10px;
   }
   .split-gallery {
     grid-template-columns: 1fr 1fr;
+    grid-template-rows: none;
+    gap: 8px;
   }
   .split-gallery img {
+    display: block;
+    height: auto;
+    max-height: 145px;
     aspect-ratio: 1 / 1;
   }
   .split__badge {
-    right: 12px;
-    bottom: 12px;
+    position: relative;
+    right: auto;
+    bottom: auto;
+    max-width: none;
+    margin-top: 10px;
+    padding: 14px;
+    font-size: 0.88rem;
+    box-shadow: none;
   }
   .gallery {
     display: flex;
