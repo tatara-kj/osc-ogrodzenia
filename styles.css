@@ -675,8 +675,11 @@ h3 {
 .gallery-card img {
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: contain;
   image-rendering: auto;
+  background:
+    radial-gradient(circle at center, rgba(255, 255, 255, 0.06), transparent 58%),
+    #111820;
   filter: contrast(1.04) saturate(0.96);
   transition: transform 0.5s;
 }
