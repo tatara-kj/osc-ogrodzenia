@@ -1366,8 +1366,10 @@ html:not(.js) .before-after {
 .feature__media img {
   width: 100%;
   aspect-ratio: 4 / 3;
-  object-fit: cover;
-  background: var(--anthracite);
+  object-fit: contain;
+  background:
+    radial-gradient(circle at center, rgba(255, 255, 255, 0.06), transparent 56%),
+    #111820;
   filter: contrast(1.04) saturate(0.95);
 }
 .feature__media img:first-child {
@@ -1382,19 +1384,34 @@ html:not(.js) .before-after {
   width: 100%;
   height: clamp(360px, 43vw, 560px);
   min-height: 0;
-  object-fit: cover;
+  object-fit: contain;
   box-shadow: 0 18px 44px rgba(13, 19, 25, 0.13);
 }
 .feature__thumbs {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
   gap: 10px;
 }
 .feature__thumbs img {
   width: 100%;
   height: clamp(150px, 18vw, 220px);
   max-height: none;
-  object-fit: cover;
+  object-fit: contain;
+}
+.is-lightbox-photo {
+  cursor: zoom-in;
+  transition:
+    opacity 0.2s ease,
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+.is-lightbox-photo:hover,
+.is-lightbox-photo:focus-visible {
+  opacity: 0.94;
+  outline: 2px solid var(--amber);
+  outline-offset: 3px;
+  transform: translateY(-1px);
+  box-shadow: 0 16px 36px rgba(13, 19, 25, 0.16);
 }
 .content-grid {
   display: grid;
@@ -1435,9 +1452,13 @@ html:not(.js) .before-after {
   margin: 0;
 }
 .lightbox__figure img {
+  display: block;
+  max-width: min(1120px, calc(100vw - 48px));
   max-height: 78vh;
   width: auto;
+  height: auto;
   margin: auto;
+  object-fit: contain;
 }
 .lightbox__caption {
   padding-top: 14px;

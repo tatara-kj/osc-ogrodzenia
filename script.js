@@ -20,9 +20,41 @@ if (navToggle && nav) {
   );
 }
 
-const lightbox = document.querySelector("[data-lightbox]");
+const ensureLightbox = () => {
+  let existingLightbox = document.querySelector("[data-lightbox]");
+  if (existingLightbox) return existingLightbox;
+
+  existingLightbox = document.createElement("div");
+  existingLightbox.className = "lightbox";
+  existingLightbox.dataset.lightbox = "";
+  existingLightbox.setAttribute("aria-hidden", "true");
+  existingLightbox.setAttribute("role", "dialog");
+  existingLightbox.setAttribute("aria-modal", "true");
+  existingLightbox.setAttribute("aria-label", "Powiększone zdjęcie");
+  existingLightbox.innerHTML = `
+    <button class="lightbox__close" type="button" aria-label="Zamknij">×</button>
+    <figure class="lightbox__figure">
+      <img src="assets/fb/osc-fb-01.jpg" alt="Podgląd zdjęcia OSC Ogrodzenia" />
+      <figcaption class="lightbox__caption" data-lightbox-caption></figcaption>
+    </figure>
+  `;
+  document.body.appendChild(existingLightbox);
+  return existingLightbox;
+};
+
+const lightbox = ensureLightbox();
 const lightboxImage = lightbox?.querySelector("img");
 const lightboxCaption = lightbox?.querySelector("[data-lightbox-caption]");
+const openLightboxForImage = (image, caption) => {
+  if (!lightbox || !lightboxImage || !image) return;
+  lightboxImage.src = image.dataset.full || image.currentSrc || image.src;
+  lightboxImage.alt = image.alt || "Powiększone zdjęcie OSC Ogrodzenia";
+  lightboxCaption.textContent = caption || image.alt || "";
+  lightbox.classList.add("is-open");
+  lightbox.setAttribute("aria-hidden", "false");
+  body.classList.add("nav-open");
+  lightbox.querySelector("button").focus();
+};
 const closeLightbox = () => {
   if (!lightbox) return;
   lightbox.classList.remove("is-open");
@@ -31,15 +63,8 @@ const closeLightbox = () => {
 };
 document.querySelectorAll("[data-lightbox-trigger]").forEach((trigger) => {
   const openLightbox = () => {
-    if (!lightbox || !lightboxImage) return;
     const image = trigger.querySelector("img");
-    lightboxImage.src = image.src;
-    lightboxImage.alt = image.alt;
-    lightboxCaption.textContent = trigger.dataset.caption || image.alt;
-    lightbox.classList.add("is-open");
-    lightbox.setAttribute("aria-hidden", "false");
-    body.classList.add("nav-open");
-    lightbox.querySelector("button").focus();
+    openLightboxForImage(image, trigger.dataset.caption || image?.alt);
   };
   trigger.addEventListener("click", openLightbox);
   trigger.addEventListener("keydown", (event) => {
@@ -49,6 +74,26 @@ document.querySelectorAll("[data-lightbox-trigger]").forEach((trigger) => {
     }
   });
 });
+document
+  .querySelectorAll(
+    ".feature__media img, .split-gallery img, .before-after-fallback img",
+  )
+  .forEach((image) => {
+    if (image.closest("[data-lightbox-trigger]") || image.closest("[data-lightbox]")) {
+      return;
+    }
+    image.classList.add("is-lightbox-photo");
+    image.setAttribute("role", "button");
+    image.setAttribute("tabindex", "0");
+    image.setAttribute("aria-label", `Powiększ zdjęcie: ${image.alt || "OSC Ogrodzenia"}`);
+    image.addEventListener("click", () => openLightboxForImage(image));
+    image.addEventListener("keydown", (event) => {
+      if (event.key === "Enter" || event.key === " ") {
+        event.preventDefault();
+        openLightboxForImage(image);
+      }
+    });
+  });
 lightbox?.querySelector("button").addEventListener("click", closeLightbox);
 lightbox?.addEventListener("click", (event) => {
   if (event.target === lightbox) closeLightbox();
